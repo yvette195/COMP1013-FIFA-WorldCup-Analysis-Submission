@@ -35,7 +35,7 @@ lightest_colour <- "#CFD6D6"
 **Subject Name:** Analytics Programming
 
 **GitHub Repository:**  
-https://github.com/yvette195/COMP1013-FIFA-WorldCup-Analysis
+https://github.com/yvette195/COMP1013-FIFA-WorldCup-Analysis-Submission
 
 # Declaration
 
@@ -810,71 +810,146 @@ These results show that `Stage` and `ExtraTime` have a relationship with match r
 
 ## GitHub Repository
 
-Git and GitHub were used to manage the development of this project.
+I created and managed the submission repository by using Git commands in Ubuntu Terminal.
 
-The GitHub repository is available at:
+The repository is available at:
 
-**https://github.com/yvette195/COMP1013-FIFA-WorldCup-Analysis**
+**https://github.com/yvette195/COMP1013-FIFA-WorldCup-Analysis-Submission**
 
-Git was used to record changes made to the project. GitHub was used to store the repository online and maintain a history of the project development.
+The analysis for Questions 1 to 4 was already prepared before this repository was created. I then organised the completed files into a new project folder and used Terminal commands to create the repository, make separate commits and push the project to GitHub.
 
 ## Project Folder Structure
 
 The project was organised into separate folders:
 
 - `data/` contains the four FIFA World Cup datasets.
-- `scripts/` contains the R scripts used for Questions 1 to 4.
-- `report/` contains the R Markdown report.
-- `figures/` contains images used in the report.
+- `scripts/` contains the R scripts for Questions 1 to 4.
+- `report/` contains the R Markdown file and the final PDF report.
+- `figures/` contains the Terminal screenshots used as evidence.
 - `COMP1013-FIFA-WorldCup-Analysis.Rproj` is the RStudio project file.
 
-This folder structure keeps the datasets, scripts, report and figures separate, making the project easier to understand and maintain.
+The folders keep the datasets, scripts, report and figures separate. This makes the project easier to understand and check.
+
+## Terminal Git Workflow Evidence
+
+### Preparing the New Project
+
+```{r terminal-project-preparation, echo=FALSE, out.width="95%"}
+knitr::include_graphics("../figures/terminal_01_prepare_new_project.png")
+```
+
+This screenshot shows the new submission folder and its project structure. The datasets, scripts, report and figures were placed into separate folders before Git was started.
+
+\newpage
+
+### Initialising Git
+
+```{r terminal-git-init, echo=FALSE, out.width="95%"}
+knitr::include_graphics("../figures/terminal_02_git_init.png")
+```
+
+I used `git init` to create a new local Git repository. I also changed the main branch name to `main`. The `git status` result showed that the repository had no commits yet and the project files were still untracked.
+
+\newpage
+
+### First Commit: Project Configuration
+
+```{r terminal-first-commit, echo=FALSE, out.width="95%"}
+knitr::include_graphics("../figures/terminal_03_first_commit.png")
+```
+
+I used `git add` to stage the project configuration files. I then used `git commit` to create the first commit with the message **Set up project**.
+
+\newpage
+
+### Adding the Datasets
+
+```{r terminal-datasets, echo=FALSE, out.width="95%"}
+knitr::include_graphics("../figures/terminal_04_add_datasets.png")
+```
+
+I added the four CSV datasets separately. The commit message **Add FIFA World Cup datasets** explains the files included in this step.
+
+\newpage
+
+### Adding the R Scripts
+
+```{r terminal-scripts, echo=FALSE, out.width="95%"}
+knitr::include_graphics("../figures/terminal_05_add_scripts.png")
+```
+
+I added the four R scripts used for Questions 1 to 4. These scripts were committed with the message **Add R scripts for Questions 1 to 4**.
+
+\newpage
+
+### Adding the R Markdown Report
+
+```{r terminal-rmarkdown, echo=FALSE, out.width="95%"}
+knitr::include_graphics("../figures/terminal_06_add_rmarkdown_report.png")
+```
+
+I added `Report.Rmd` in a separate commit. This keeps the report source separate from the datasets and R scripts in the commit history.
+
+\newpage
+
+### Creating the GitHub Repository and Pushing
+
+```{r terminal-create-repository, echo=FALSE, out.width="95%"}
+knitr::include_graphics("../figures/terminal_07_create_repo_and_push.png")
+```
+
+I used GitHub CLI in Ubuntu Terminal to create the new public repository. The local repository was connected to GitHub as `origin`, and the existing commits were pushed to the remote `main` branch.
+
+\newpage
+
+### Checking the GitHub Connection
+
+```{r terminal-verify-connection, echo=FALSE, out.width="95%"}
+knitr::include_graphics("../figures/terminal_08_verify_github_connection.png")
+```
+
+The `git remote -v` result shows the new GitHub repository URL. The branch information shows that the local `main` branch follows `origin/main`. The commit history also confirms that the local and remote repositories contain the same commits.
+
+\newpage
+
+### Adding and Pushing the Terminal Evidence
+
+```{r terminal-evidence-push, echo=FALSE, out.width="95%"}
+knitr::include_graphics("../figures/terminal_09_add_evidence_and_push.png")
+```
+
+I added the Terminal screenshots by using `git add`. I then committed them with the message **Add Terminal Git workflow screenshots** and pushed the new commit to GitHub.
 
 ## Commit History
 
 ```{r question-5-commit-history, echo=FALSE, out.width="100%"}
-knitr::include_graphics("../figures/commit_history.png")
+knitr::include_graphics("../figures/commit_history_submission.png")
 ```
+
+The screenshot shows the commit history of the new submission repository. The commits were created separately for the project configuration, datasets, R scripts, R Markdown report and Terminal screenshots.
+
 
 ## Explanation of the Commit History
 
-The commit history shows that I developed the project step by step. I did not upload all the work in only one commit.
+The commit history shows that I added the project files through separate steps. I did not add all the files in only one commit.
 
-1. **Initial commit**  
-   This was the first commit used to start the repository.
+1. **Set up project**  
+   This commit added the `.gitignore`, README and RStudio project file.
 
-2. **Create initial project structure**  
-   This commit created the main folders for the project, including the data, scripts, report and figures folders.
-
-3. **Set up RStudio project and report template**  
-   This commit added the RStudio project file and the first R Markdown report template.
-
-4. **Add FIFA World Cup datasets**  
+2. **Add FIFA World Cup datasets**  
    This commit added the four CSV datasets used for the assignment.
 
-5. **Complete Question 1 data preparation and penalty analysis**  
-   This commit added the data cleaning and penalty analysis for Question 1.
+3. **Add R scripts for Questions 1 to 4**  
+   This commit added the four R scripts used for the data preparation and analysis.
 
-6. **Complete Questions 1 and 2 data analysis**  
-   This commit added the main analysis for Questions 1 and 2.
+4. **Add R Markdown analysis report**  
+   This commit added the `Report.Rmd` source file.
 
-7. **Simplify code and complete Questions 1 and 2**  
-   This commit changed some code into simpler code and completed the first two questions.
+5. **Add Terminal Git workflow screenshots**  
+   This commit added the screenshots showing the Git and GitHub commands used in Ubuntu Terminal.
 
-8. **Change path of datasets**  
-   This commit changed the dataset paths so the files could be read correctly from the report folder.
+The commits separate the main parts of the project. The commit messages are simple and they show what was added at each step.
 
-9. **Fix report paths and update Questions 1 and 2**  
-   This commit fixed more file-path problems and updated the content for Questions 1 and 2.
+The screenshot was taken before the final report commit because the image needed to be inserted into the report before the final PDF could be created.
 
-10. **Complete Questions 3 and 4 analysis**  
-    This commit added the penalty-shootout rankings and the match-outcome analysis.
-
-11. **Complete Question 5 and final report**  
-    This commit added the GitHub section, the commit-history screenshot and the first final PDF report.
-
-12. **Revise explanations and update chart colours**  
-    This commit rewrote the rationale and explanation sections using simpler English. It also changed the charts to use the same colour palette.
-
-The commit messages show the main progress of my assignment. They also make it easier to understand what I changed at each stage.
 \newpage
