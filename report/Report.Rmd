@@ -57,11 +57,12 @@ By including this statement, we the authors of this work, verify that:
 
 ## Rationale
 
-I joined the four datasets because the information for this analysis was not stored in only one file. The `Matches` dataset contains the match results and scores, while the other datasets provide the team, stadium and tournament information. Joining them made it easier for me to use all the information in one data frame.
+I had to combine the four data sets because the data needed for our analysis did not reside within a single file. The `Matches` data set gave the results of the matches and their scores while the other data sets provided the information on teams, stadiums and tournaments. Combining the four data sets allowed me to pull all the info together in one data frame.
 
-I changed `"?"` to `NA` because `"?"` is only a text value, but `NA` is recognised by R as a missing value. I changed `Result`, `Stage`, `Country` and `ExtraTime` to factors because these variables contain categories. I changed `HomePenalty` and `AwayPenalty` to numeric because they show the number of penalty goals.
+I replaced `"?"` with `NA` because while `"?"` is just a string, `NA` is recognized by R as missing information. I converted `Result`, `Stage`, `Country` and `ExtraTime` into factors since these are categorical variables. I changed variables `HomePenalty` and `AwayPenalty` into numbers since they reflect the amount of penalty kicks taken.
 
-I used a bar chart for `HomePenalty` because penalty scores are separate whole numbers. The chart makes it easy to see which penalty score appeared more often and which score appeared less often.
+I used a bar chart for `HomePenalty` as these are discrete whole numbers. This makes it easy to see what penalty kicks had bigger frequencies compared to others.
+
 
 ## Load and Join the Data
 
@@ -166,9 +167,9 @@ sum(is.na(df$HomePenalty))
 sum(is.na(df$AwayPenalty))
 ```
 
-The number of rows in `matches` and `df` should be the same. This is important because joining the other datasets should add more columns, but it should not remove or add match records.
+The count of rows in the `matches` and `df` matrices ought to be identical. This is critical, as joining the other datasets would only increase the number of columns but not the number of match records.
 
-The four category variables should return `"factor"`. The penalty variables should return `"numeric"`. The two missing-value checks should return zero. These checks help me confirm that the data was changed into the correct format before doing the analysis.
+The results of the four categorical variables should be `"factor"`. The outcome for the penalty variables should be `"numeric"`. The results of the two missing value checks should both be zeros. This will allow one to verify that the data has been converted into the appropriate format for analysis.
 
 ## Results and Interpretation
 
@@ -200,9 +201,9 @@ ggplot(penalty_matches, aes(x = factor(HomePenalty))) +
   theme_minimal()
 ```
 
-There were `r nrow(penalty_matches)` matches that included a penalty shootout. The most common value of `HomePenalty` was `r most_common_penalty`. This value appeared in `r most_common_count` matches.
+Out of a total of 35 matches, 12 matches had home penalty of 3, which was most commonly observed.
 
-From the chart, some penalty scores appeared more often than the other scores. The taller bars mean that the score happened in more matches. The shorter bars mean that the score was less common. The distribution was not equal because the bars did not have the same height.
+According to the bar chart, some penalty scores received more frequent occurrences than others. It can be inferred that as the size of the column increases, the occurrence of that particular score increases. On the contrary, smaller the length of the column; lesser will be the occurrence of that score. So, the distribution is not uniform as heights of the columns are different.
 
 \newpage
 
@@ -210,11 +211,11 @@ From the chart, some penalty scores appeared more often than the other scores. T
 
 ## Rationale
 
-I used histograms because `HomeTeamScore` is a numerical variable. Football scores are whole numbers, so I used a bin width of one. This means that each bar represents one score, such as 0, 1, 2 or 3 goals.
+The reason I employed histograms is that the `HomeTeamScore` is a numerical variable. In football, scores are expressed as integers so I set a bin width of 1. It implies that each bar represents a different score such as 0, 1, 2 or 3 goals.
 
-I compared the home-team scores by `Stage`, `TournamentName` and `AwayScoreGroup`. I separated these comparisons because putting all the information in one chart would make the chart too crowded and difficult to read.
+I made comparisons of home team scores based on `Stage`, `TournamentName` and `AwayScoreGroup` separately so that encoded information was not overlapping and was easier to read.
 
-I also used `aggregate()` to calculate the mean and median for each group. The histograms show the shape of the score distribution, while the mean and median give simple numbers that can be compared between groups.
+In addition, I calculated the mean and median using `aggregate()` function for every group.
 
 ## Distribution by Competition Stage
 
@@ -389,9 +390,11 @@ sum(table(df$AwayScoreGroup))
 nrow(df)
 ```
 
-`HomeTeamScore` and `AwayTeamScore` should be numeric variables. R may show `"integer"` because football scores are whole numbers, and this is still suitable for this analysis.
+Both the `HomeTeamScore` and the `AwayTeamScore` fields should be considered as numeric fields, and it is okay for R to show them as `"integer"`, because football scores are whole numbers.
 
-The missing-value results should be zero. `AwayScoreGroup` should be a factor and it should not contain missing values. The total number of matches in the three groups should also be equal to the number of rows in `df`. This check confirms that every match was placed into one group.
+The missing values should equal zero while the `AwayScoreGroup` variable should be factor and should not have any missing values.
+
+The total number of matches in all the three groups should equal the amount of rows in the `df` data frame. Through this check it can be confirmed that every match has been put into one of the groups.
 
 ## Results and Interpretation
 
@@ -422,15 +425,15 @@ highest_group <- away_group_mean$AwayScoreGroup[highest_group_row]
 highest_group_mean <- away_group_mean$HomeTeamScore[highest_group_row]
 ```
 
-The stage with the highest average home-team score was **`r highest_stage`**, with an average of `r round(highest_stage_mean, 2)` goals. The stage with the lowest average was **`r lowest_stage`**, with an average of `r round(lowest_stage_mean, 2)` goals.
+The highest average of home-team scores was in final stage with an average of 3.83 goals, while the lowest home-team average appeared in the second group stage with a mean of 1.56 goals.
 
-The histograms show that most home-team scores were around the lower score values. Some stages had more matches than the other stages, so their bars were also taller. The chart is useful for comparing the general score pattern, but the mean is also needed because the number of matches was different between stages.
+The histograms indicate that most home-team scores were located in the lower scores range, and that some stages had larger number of matches than others, making their bars taller. This chart can help understand the overall scoring process but in this case the mean is important as well since the number of matches was different.
 
-The tournament with the highest average home-team score was **`r highest_tournament`**, with `r round(highest_tournament_mean, 2)` goals. The tournament with the lowest average was **`r lowest_tournament`**, with `r round(lowest_tournament_mean, 2)` goals.
+The tournament with the highest home-team average score is the 1954 FIFA World Cup with 4.19 goals. The lowest scoring tournament is the 2010 FIFA World Cup with 1.19 goals.
 
-The score distribution was not exactly the same for every tournament. Some tournaments had more high-scoring matches, while some tournaments had more scores around zero, one or two goals. However, the number of matches was also different between tournaments, so the charts should be compared together with the mean and median.
+The score distribution was not the same for all tournaments, since some tournaments had more scores but some tournaments had many games with zero, one or two goals. Nevertheless, as the number of matches was different in all tournament it is important to compare not only the graphs but also the means and medians of different tournaments.
 
-For the away-team score groups, **`r highest_group`** had the highest average home-team score, at `r round(highest_group_mean, 2)` goals. This shows that the home-team score was different between the three away-score groups. However, this is only a relationship found in the dataset. It does not mean that the away-team score directly caused the home-team score.
+In terms of away teams' score groups, 0-1 scored best on home teams' average with 1.77 goals. It means that the home teams' score differs among three away teams' scores groups, however this is only correlation because there is no causal effect.
 
 \newpage
 
@@ -438,11 +441,11 @@ For the away-team score groups, **`r highest_group`** had the highest average ho
 
 ## Rationale
 
-I first selected only the matches where `PenaltyShootout` was equal to 1. I did this because Question 3 only asks about matches that included a penalty shootout.
+I filtered the games where `PenaltyShootout` equals one, as Question 3 is limited to the games with a penalty shootout.
 
-After filtering the matches, I grouped the data by the team name and team code. I counted the number of matches for each team by using `summarise()` and `n()`.
+After that, I grouped the data by team name and team code and calculated the number of matches for each team in two steps. For this, I used `summarise()` and `n()`.
 
-I did the home-team and away-team analysis separately because a team may be recorded as the home team in one match and the away team in another match. I then sorted the results from the highest number to the lowest number. Finally, I used `head()` to select the first five teams.
+I ran the home team and away team analysis separately, since a team can be home in one game and away in another. Then I sorted the data by the number of matches in descending order and selected the first five teams through `head()`.
 
 ## Filter Penalty Shootout Matches
 
@@ -538,9 +541,9 @@ top5_home$NumberOfMatches
 top5_away$NumberOfMatches
 ```
 
-The `PenaltyShootout` table should only show the value 1. This confirms that the filtered data only contains penalty-shootout matches.
+The `PenaltyShootout` table is expected to show the value of 1 only. This implies that the data filtered shows only penalty shootout matches.
 
-Both final tables should contain five rows. They should also contain the columns `TeamName`, `TeamCode` and `NumberOfMatches`. The missing-value checks should return zero. The match counts should be shown from the highest value to the lowest value.
+The two final tables should consist of five rows each. The columns `TeamName`, `TeamCode` and `NumberOfMatches` must also be included. The checks for missing values should return zero in both cases. The count of matches should be listed from the highest value downwards.
 
 ## Results and Interpretation
 
@@ -567,13 +570,13 @@ leading_away_team <- top5_away$TeamName[1]
 leading_away_count <- top5_away$NumberOfMatches[1]
 ```
 
-The first team in the home-team table was **`r leading_home_team`**. This team appeared in `r leading_home_count` penalty-shootout matches as the home team.
+Argentina is the first team to be placed on the home table. This team participated in 4 penalty shootouts as the team that played at home.
 
-The first team in the away-team table was **`r leading_away_team`**. This team appeared in `r leading_away_count` penalty-shootout matches as the away team.
+France is the first team to be placed on the away table. This team participated in 5 penalty shootouts as the away team.
 
-There were `r number_common` teams that appeared in both top-five tables. These teams were **`r paste(common_teams, collapse = ", ")`**. The two rankings were **`r ifelse(same_ranking, "the same", "different")`** when I compared the team names and their order.
+There are 1 teams that appeared in both teams. These teams were Argentina. The ranking of the teams based on the two tables is different based on the names of the teams and their order.
 
-The home and away rankings can be different because the home-team and away-team labels can change from one match to another match. In this dataset, being called the home team also does not always mean that the team played in its own country.
+The order of the home and away tables can be different in some matches. In the case of this dataset, being the home team does not always mean that the team plays in its country.
 
 \newpage
 
@@ -581,13 +584,11 @@ The home and away rankings can be different because the home-team and away-team 
 
 ## Selected Factors and Rationale
 
-I selected `Stage` and `ExtraTime` as the two factors.
+The two factors that I have selected to work on for my investigation are `Stage` and `ExtraTime`. The rationale behind the selection of `Stage` is that matches can be played in different ways at different stages of the tournament. A match at a group stage cannot be the same as a match played during the semi-finals or finals. Different strategy might be used by the teams depending on the importance of the match.
 
-I selected `Stage` because matches may be played differently at different parts of the tournament. For example, a group-stage match may not have the same situation as a semi-final or final match. Teams may use a different strategy because the importance of the match is different.
+The reason behind the selection of the `ExtraTime` variable is that there might be a different pattern of results in matches that continued into extra time. For instance, extra time might be played in matches when the teams are very close in score.
 
-I selected `ExtraTime` because matches that continue after regular time may have a different result pattern. Extra time may happen when the teams are close in performance, so I wanted to compare these matches with the other matches.
-
-I used frequency tables first because they show the number of home wins, away wins and draws. I also used row percentages because the number of matches was not the same in every group. The proportional bar charts make the three result categories easier to compare.
+To investigate these variables, I first applied frequency tables to compute the frequency of home wins, away wins or draws. Then I made use of row percentages because the number of the matches in different groups was not equal. Proportionally constructed charts were used in order to visualize the comparison of the three result categories.
 
 ## Overall Match Results
 
@@ -754,9 +755,7 @@ rowSums(stage_result_percent)
 rowSums(extra_time_result_percent)
 ```
 
-`Result`, `Stage` and `ExtraTime` should return `"factor"`. Their levels show the categories stored inside each variable.
-
-The missing-value checks should return zero. The total value from each count table should be equal to the number of rows in `df`. The rows in the percentage tables should add to around 100%. A result such as 99.9% or 100.1% can happen because the percentages were rounded.
+The outputs for `Result`, `Stage`, and `ExtraTime` are required to be `"factor"` since they demonstrate the various groups of categories present inside each variable respectively. The results from the missing-values test must be zero. Each of the counts must yield the same output as the rows in `df`. The percentage tables must add up to 100% too, although results like 99.9% or 100.1% would not be uncommon since the percentages were rounded up.
 
 ## Results and Interpretation
 
@@ -796,13 +795,15 @@ highest_home_extra_percent <- extra_time_result_percent[
 ]
 ```
 
-For all matches, the most common result was **`r most_common_result`**. This result happened in `r most_common_result_count` matches.
+In all matches, the home team winning was the most frequently observed result and the total number of matches resulting in this outcome was 545.
 
-For the competition stages, **`r highest_home_stage`** had the highest percentage of home-team wins, at `r highest_home_stage_percent`%. The percentage table shows that the result pattern was not exactly the same for every stage. Some stages had a higher percentage of home-team wins, while some stages had more away-team wins or draws.
+Considering the stages of the competition, the last stage had the most percentage of home team winning, which is equal to 83.3%. The table of percentages indicates that the same trend is not observed for every competition stage.
 
-For extra time, the category **`r highest_home_extra`** had the highest percentage of home-team wins, at `r highest_home_extra_percent`%. The chart also shows that the result distribution was different between the extra-time categories.
+Some stages show a higher ratio of observed results; while in a different part of stages the losses of the home team or draws were more frequent.
 
-These results show that `Stage` and `ExtraTime` have a relationship with match results in this dataset. However, the analysis does not prove that these two factors directly caused a home-team win, away-team win or draw. Other factors may also affect the match result.
+As for the extra time part, the first category showed the highest ratio of home team winning with 57.5%. Moreover, the table demonstrates that the distribution of the results differs for the extra time categories.
+
+Thus, it can be concluded that the stages of the competition and extra time play a role in the match result in the data set discussed. However, in the analysis of the obtained results it was not proven whether the impact of both mentioned factors was responsible for home team win, home team loss, or draw.
 
 \newpage
 
@@ -838,7 +839,7 @@ The folders keep the datasets, scripts, report and figures separate. This makes 
 knitr::include_graphics("../figures/terminal_01_prepare_new_project.png")
 ```
 
-This screenshot shows the new submission folder and its project structure. The datasets, scripts, report and figures were placed into separate folders before Git was started.
+This screenshot shows a new submission directory as well as its project structure. Datasets, scripts, report and figures were allocated to particular folders before introducing the Git system.
 
 \newpage
 
@@ -848,7 +849,7 @@ This screenshot shows the new submission folder and its project structure. The d
 knitr::include_graphics("../figures/terminal_02_git_init.png")
 ```
 
-I used `git init` to create a new local Git repository. I also changed the main branch name to `main`. The `git status` result showed that the repository had no commits yet and the project files were still untracked.
+I made use of `git init` in order to set up the new local repository. In addition, I renamed the main branch to `main`. `git status` results indicate that the repository does not have any commits yet and no files are accounted for.
 
 \newpage
 
@@ -858,7 +859,7 @@ I used `git init` to create a new local Git repository. I also changed the main 
 knitr::include_graphics("../figures/terminal_03_first_commit.png")
 ```
 
-I used `git add` to stage the project configuration files. I then used `git commit` to create the first commit with the message **Set up project**.
+I applied `git add` to stage the project configuration files and successfully made the first commit using `git commit` by coding the message `Set up project`.
 
 \newpage
 
@@ -868,7 +869,8 @@ I used `git add` to stage the project configuration files. I then used `git comm
 knitr::include_graphics("../figures/terminal_04_add_datasets.png")
 ```
 
-I added the four CSV datasets separately. The commit message **Add FIFA World Cup datasets** explains the files included in this step.
+I uploaded the four CSV datasets one at a time. The commit message `Add FIFA World Cup datasets` recaps about the files uploaded.
+
 
 \newpage
 
@@ -878,7 +880,7 @@ I added the four CSV datasets separately. The commit message **Add FIFA World Cu
 knitr::include_graphics("../figures/terminal_05_add_scripts.png")
 ```
 
-I added the four R scripts used for Questions 1 to 4. These scripts were committed with the message **Add R scripts for Questions 1 to 4**.
+I uploaded the four R scripts used to answer the Questions 1 through 4. The scripts were uploaded with the commit message `Add R scripts for Questions 1 to 4`.
 
 \newpage
 
@@ -888,7 +890,7 @@ I added the four R scripts used for Questions 1 to 4. These scripts were committ
 knitr::include_graphics("../figures/terminal_06_add_rmarkdown_report.png")
 ```
 
-I added `Report.Rmd` in a separate commit. This keeps the report source separate from the datasets and R scripts in the commit history.
+I uploaded `Report.Rmd` independently. Thus, the log contains the report source separately from data and R scripts.
 
 \newpage
 
@@ -898,7 +900,7 @@ I added `Report.Rmd` in a separate commit. This keeps the report source separate
 knitr::include_graphics("../figures/terminal_07_create_repo_and_push.png")
 ```
 
-I used GitHub CLI in Ubuntu Terminal to create the new public repository. The local repository was connected to GitHub as `origin`, and the existing commits were pushed to the remote `main` branch.
+I created the new public repository with the help of GitHub CLI in Ubuntu Terminal. The local repository was configured with GitHub as `origin` and the original commits were uploaded to the remote `main` branch.
 
 \newpage
 
@@ -908,7 +910,7 @@ I used GitHub CLI in Ubuntu Terminal to create the new public repository. The lo
 knitr::include_graphics("../figures/terminal_08_verify_github_connection.png")
 ```
 
-The `git remote -v` result shows the new GitHub repository URL. The branch information shows that the local `main` branch follows `origin/main`. The commit history also confirms that the local and remote repositories contain the same commits.
+The `git remote -v` command will show the new GitHub repository address. In comparison with local section, branch details point out that local `main` section follows `origin/main`. The log will confirm that both local and remote sections include the same commits.
 
 \newpage
 
@@ -918,7 +920,7 @@ The `git remote -v` result shows the new GitHub repository URL. The branch infor
 knitr::include_graphics("../figures/terminal_09_add_evidence_and_push.png")
 ```
 
-I added the Terminal screenshots by using `git add`. I then committed them with the message **Add Terminal Git workflow screenshots** and pushed the new commit to GitHub.
+I uploaded the terminal commands with `git add` command and later made a commit with the message `Add Terminal Git commands screenshots`.
 
 ## Commit History
 
@@ -926,30 +928,30 @@ I added the Terminal screenshots by using `git add`. I then committed them with 
 knitr::include_graphics("../figures/commit_history_submission.png")
 ```
 
-The screenshot shows the commit history of the new submission repository. The commits were created separately for the project configuration, datasets, R scripts, R Markdown report and Terminal screenshots.
+The diagram presents an account of the commits made to a new submission repository. Each of the commits was made one at a time for project configuration, datasets, R scripts, R Markdown reports, and terminal screenshots.
 
 
 ## Explanation of the Commit History
 
-The commit history shows that I added the project files through separate steps. I did not add all the files in only one commit.
+According to the commit message log, I made all of the contributions to the project separately, not in a single commit.
 
 1. **Set up project**  
-   This commit added the `.gitignore`, README and RStudio project file.
+This commit involved the addition of the `.gitignore`, `README`, and RStudio project files.
 
 2. **Add FIFA World Cup datasets**  
-   This commit added the four CSV datasets used for the assignment.
+This commit relates to the four CSV files shared in our assignment.
 
 3. **Add R scripts for Questions 1 to 4**  
-   This commit added the four R scripts used for the data preparation and analysis.
+The four R scripts added to prepare and analyze data are mentioned in this commit.
 
 4. **Add R Markdown analysis report**  
-   This commit added the `Report.Rmd` source file.
+This commit incorporates the `Report.Rmd` file.
 
 5. **Add Terminal Git workflow screenshots**  
-   This commit added the screenshots showing the Git and GitHub commands used in Ubuntu Terminal.
+This commit brings in the screenshots showing the usage of Git and GitHub commands on Ubuntu Terminal.
 
-The commits separate the main parts of the project. The commit messages are simple and they show what was added at each step.
+Analyzing the commit logs, one can see what was done in different phases of developing the project. The messages regarding each commit are quite informative yet simple to understand.
 
-The screenshot was taken before the final report commit because the image needed to be inserted into the report before the final PDF could be created.
+The screenshot of this step was taken prior to the last commit since these images had to be placed in the report before the final output.
 
 \newpage
